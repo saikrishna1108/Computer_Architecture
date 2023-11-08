@@ -1,0 +1,29 @@
+.data
+ARRAY_A_ADDR:   .word 0x0400
+ARRAY_B_ADDR:   .word 0x0800
+ARRAY_C_ADDR:   .word 0x0C00
+
+.text
+.globl main
+
+main:
+    addi t0, x0, 0
+
+loop_start:
+    lw a0, ARRAY_A_ADDR    
+    lw a1, ARRAY_B_ADDR   
+    add a0, a0, t0         
+    add a1, a1, t0       
+    flw f0, 0(a0)         
+    flw f1, 0(a1)          
+                         
+    fadd.s f2, f0, f1     
+    lw a2, ARRAY_C_ADDR    
+    add a2, a2, t0         
+    fsw f2, 0(a2)          
+                            
+    addi t0, t0, 4         
+    addi t1, x0, 256       
+    blt t0, t1, loop_start 
+    lui a7, 10
+    ecall
