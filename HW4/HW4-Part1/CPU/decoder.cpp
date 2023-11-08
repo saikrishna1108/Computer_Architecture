@@ -240,6 +240,21 @@ std::string checkOpcode(uint32_t inst) {;
         default: opcodeN = "NOPE";
         }
     }
+     if (!(getOpcode(inst) ^ 0b0000111)) {
+        unsigned int b = getfun3(inst);
+        switch (b) {
+        case 0b010: opcodeN = "flw";
+            break;
+        default: opcodeN = "NOPE";
+        }
+    }
+     if (!(getOpcode(inst) ^ 0b0100111)) {
+        unsigned int b = getfun3(inst);
+        switch (b) {
+        case 0b010: opcodeN = "fsw";
+            break;
+        default: opcodeN = "NOPE";
+        }
     }
     
 

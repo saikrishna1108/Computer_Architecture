@@ -33,7 +33,7 @@ std::string runExecute(uint32_t instr) {
         if (rs1 >= 0 && rs1 < 10) {
             // Simulate type conversion from integer to float
             int offset = getimm11_0(instr);
-            ram[dest] = ram[registers[rs1]] + offset;
+            registers[dest] = ram[registers[rs1]] + offset;
             RAM_COUNT += 1;
             clockCycle += 1;
             std::cout << "Clock cycle :" << clockCycle << " Stall" << "\n"; 
@@ -55,7 +55,7 @@ std::string runExecute(uint32_t instr) {
     else if (opcode == "fsw") {
             int offset = getimm11_5(instr);
             int address = registers[rs1] ;
-            registers[address] = static_cast<float>(registers[rs2]) + offset;
+            ram[address] = static_cast<float>(registers[rs2]) + offset;
               RAM_COUNT += 1;
             clockCycle += 1;
             std::cout << "Clock cycle :" << clockCycle << " Stall" << "\n"; 
