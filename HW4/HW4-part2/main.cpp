@@ -45,11 +45,12 @@ uint32_t instruction2;
 int l = INSTRUCTION_START2;
 int RAM_COUNT = 0;
 bool t0 = true;
+BusArbitration bus2;
 std::string runcpu1(int stage){
     std::cout << "CPU1 Clockcycle :" << clockCycle << " :";
     clockCycle++;
     if (stage == 1) {
-            instruction1 = ram[k + i];
+            instruction1 = bus2.getDataFromRAM(i+k);
             RAM_COUNT+=1;
             std::cout << "FETCH INSTRUCTION: " << instruction1 << "\n";
             inst_count1++;
@@ -77,7 +78,7 @@ std::string runcpu2(int stage){
     std::cout << "CPU2 Clockcycle :" << clockCycle2 << " :";
     clockCycle2++;
     if (stage == 1) {
-            instruction2 = ram[l + j];
+            instruction2 = bus2.getDataFromRAM(l+j);
             RAM_COUNT+=1;
             std::cout << "FETCH INSTRUCTION: " << instruction2 << "\n";
             inst_count2++;
